@@ -6,6 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import StButton from "../../../components/Buttons/StButton.jsx";
 
 const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   const dispatch = useDispatch();
@@ -29,10 +30,12 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
         <div>{todo.body}</div>
       </div>
       <StDialogFooter>
-        <StButton borderColor="red" onClick={() => onDeleteTodo(todo.id)}>
+        <StButton width="50%" height="40px" borderColor="red" onClick={() => onDeleteTodo(todo.id)}>
           삭제하기
         </StButton>
         <StButton
+          width="50%"
+          height="40px"
           borderColor="green"
           onClick={() => onToggleStatusTodo(todo.id)}
         >
@@ -66,16 +69,6 @@ const StDialogFooter = styled.footer`
   margin-top: 10px;
   gap: 12px;
   margin-top: 24px;
-`;
-
-const StButton = styled.button`
-  border: 2px solid ${({ borderColor }) => borderColor};
-  font-size: 13px;
-  height: 40px;
-  width: 50%;
-  border-radius: 5px;
-  background-color: white;
-  cursor: pointer;
 `;
 
 export default ListOfList;
