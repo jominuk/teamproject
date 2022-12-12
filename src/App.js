@@ -9,7 +9,7 @@ const App = () => {
     localStorage.setItem("todo", JSON.stringify(todos));
   }, [todos]);
 
-  console.log(todos);
+  console.log("난 승재");
 
   return <Router />;
 };
