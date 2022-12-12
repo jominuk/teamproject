@@ -9,6 +9,8 @@ const App = () => {
     localStorage.setItem("todo", JSON.stringify(todos));
   }, [todos]);
 
+  console.log(todos);
+
   return <Router />;
 };
 
