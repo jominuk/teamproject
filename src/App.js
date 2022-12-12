@@ -8,7 +8,7 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("todo", JSON.stringify(todos));
   }, [todos]);
-
+  console.log("난 승재");
   return <Router />;
 };
 
