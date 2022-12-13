@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import nextId from "react-id-generator/lib/nextId";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import StButton from "../components/Buttons/StButton";
-import { __addTodo } from "../redux/modules/todosSlice";
+import { __addTodos } from "../redux/modules/todosSlice";
 
 const AddTodo = () => {
-  const id = nextId();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [input, setInput] = useState({
     title: "",
@@ -22,8 +22,8 @@ const AddTodo = () => {
     e.preventDefault();
     if (input.title.trim() === "" || input.body.trim() === "") return;
     dispatch(
-      __addTodo({
-        id: id,
+      __addTodos({
+        id: `todos_${new Date().getTime() + Math.random()}`,
         title: input.title,
         body: input.body,
         isDone: false,
@@ -33,19 +33,27 @@ const AddTodo = () => {
       title: "",
       body: "",
     });
+    navigate("/");
   };
 
   return (
-    <Addcontainer onSubmit={onSubmitHandler}>
+    <Addcontainer>
       <AddBox>
-        <form>
-          <TitleInput placeholder="제목을 작성해주세요" />
-          <BodoyInput placeholder="내용을 작성해주세요" />
+        <form onSubmit={onSubmitHandler}>
+          <TitleInput type="text" name="title" value={input.title} onChange={onChangeHandler} placeholder="제목을 작성해주세요" />
+          <BodoyInput type="text" name="body" value={input.body} onChange={onChangeHandler} placeholder="내용을 작성해주세요" />
           <BtnBox>
-            <StButton width="13rem" height="40px" borderColor="blue" value={input.title} onChange={onChangeHandler}>
+            <StButton width="13rem" height="40px" borderColor="blue" type="submit">
               버킷 추가하기
             </StButton>
-            <StButton width="13rem" height="40px" borderColor="red" value={input.body} onChange={onChangeHandler}>
+            <StButton
+              width="13rem"
+              height="40px"
+              borderColor="red"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
               돌아가기
             </StButton>
           </BtnBox>
@@ -87,6 +95,7 @@ const BodoyInput = styled.textarea`
   border: 0px;
   padding: 1rem;
   margin-top: 3.5rem;
+  font-size: 1.5rem;
   ::placeholder {
     font-size: 2rem;
     font-weight: 600;
