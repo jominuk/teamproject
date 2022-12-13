@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTodoByID } from "../redux/modules/todosSlice.js";
+// import { editTodo } from "../redux/modules/todosSlice";
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,15 @@ const Detail = () => {
         <div>
           <StDialogHeader>
             <div>ID :{todo.id}</div>
+            {/* <Link to={`/EditTod/${todo.id}`}> */}
+
+            <StButton borderColor="#ddd" onClick={() => navigate("/EditTodo")}>
+              수정하기
+            </StButton>
+            {/* </Link> */}
+
             <StButton
-              borderColor="#ddd"
+              borderColor="#dddddd"
               onClick={() => {
                 navigate("/");
               }}
