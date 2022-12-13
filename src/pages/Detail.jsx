@@ -11,7 +11,10 @@ import StButton from "../components/Buttons/StButton.jsx";
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const todo = useSelector((state) => state.todos);
+  const todo = useSelector((state) => state.todos.todo);
+  const { comments } = useSelector((state) => state.comments);
+  console.log(comments);
+
   const [comment, setComment] = useState({ commentBody: "" });
 
   const { id } = useParams();
@@ -31,11 +34,8 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getTodoByID(id));
-  }, [dispatch, id]);
-
-  useEffect(() => {
     dispatch(__getComments());
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>
@@ -97,20 +97,24 @@ const Detail = () => {
       </StCommentInputGroup>
 
       <StCommentContainer>
-        {/* {comments.map((comment) => (key={comments.id}{commdnts.comment}))} */}
-        <StComment>
-          <div>2022-12-12</div>
-          <div>내용이 들어갑니다</div>
+        {comments?.map((el) => {
+          console.log(el);
+          return (
+            <StComment key={`comment_${el.id}`}>
+              <div>2022-12-12</div>
+              <div>{el.comment}</div>
 
-          <StButtonGroup>
-            <StButton borderColor="teal" width="50px" height="30px">
-              수정
-            </StButton>
-            <StButton borderColor="red" width="50px" height="30px">
-              삭제
-            </StButton>
-          </StButtonGroup>
-        </StComment>
+              <StButtonGroup>
+                <StButton borderColor="teal" width="50px" height="30px">
+                  수정
+                </StButton>
+                <StButton borderColor="red" width="50px" height="30px">
+                  삭제
+                </StButton>
+              </StButtonGroup>
+            </StComment>
+          );
+        })}
       </StCommentContainer>
     </>
   );
