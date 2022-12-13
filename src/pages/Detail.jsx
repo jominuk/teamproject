@@ -7,6 +7,7 @@ import {
   __addComments,
 } from "../redux/modules/commentsSlice.js";
 import { getTodoByID } from "../redux/modules/todosSlice.js";
+// import { editTodo } from "../redux/modules/todosSlice";
 import StButton from "../components/Buttons/StButton.jsx";
 
 const Detail = () => {
@@ -49,9 +50,7 @@ const Detail = () => {
                   borderColor="black"
                   width="70px"
                   height="50px"
-                  onClick={() => {
-                    navigate("/");
-                  }}
+                  onClick={() => navigate("/EditTodo")}
                 >
                   수정하기
                 </StButton>
