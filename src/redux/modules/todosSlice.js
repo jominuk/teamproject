@@ -27,6 +27,8 @@ export const __toggleStatusTodo = createAsyncThunk(
     }
   }
 );
+//서버에서 에러가나면??? 에러핸들링ㅇ을 하기 위해서  -> 예외처리를 세심하게하자! , 에러가 터질수있는공간에는 전부 예외처리
+// 서버에서 왔다고 가정하고 보여줄 수는 있지만 에러가 있을 수 있기 떄문에 응답값에 따라서 보여주
 
 export const __deleteTodo = createAsyncThunk(
   "DELETE_TODO",
@@ -35,8 +37,6 @@ export const __deleteTodo = createAsyncThunk(
       await axios.delete(`http://localhost:3001/todos/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
-      console.log("에러는", err);
-      //서버에러 =>
       return thunkAPI.rejectWithValue(err);
     }
   }
@@ -57,6 +57,24 @@ const todosSlice = createSlice({
       state.todo = state.todos.filter((el) => action.payload === el.id)[0];
     },
   },
+
+  //그래프 QL!! ===? 서버도 그래프ql로 구현되야 가능 -> 노마드코더 무료강의 추천 (서버, 프론트 )
+
+  // extraReducers:(builder)=>{
+  //   builder
+  //   .addCase(__getTodos.pending,(state) => {
+  //     state.isLoading = true;
+  //   })
+  //   .addCase(__getTodos.fulfilled,(state,action) => {
+  //     state.isLoading = false;
+  //     state.todos = action.payload;
+  //   })
+  //   .addCase(__getTodos.rejected,(state,action) => {
+  //     state.isLoading = false;
+  //     state.error = action.payload;
+  //   })
+  // }
+
   extraReducers: {
     //add
     [__getTodos.pending]: (state) => {
@@ -101,5 +119,5 @@ const todosSlice = createSlice({
   },
 });
 
-export const { deleteTodo, getTodoByID } = todosSlice.actions;
+export const { getTodoByID } = todosSlice.actions;
 export default todosSlice.reducer;
