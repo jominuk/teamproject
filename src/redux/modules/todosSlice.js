@@ -7,6 +7,8 @@ const saveData = JSON.parse(localStorage.getItem("todo"))
 const initialState = {
   todos: [...saveData],
   todo: {},
+  isLoading: false,
+  error: null,
 };
 
 const todosSlice = createSlice({
