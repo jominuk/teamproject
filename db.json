@@ -1,9 +1,8 @@
 {
-  "todos": [
+  "todos": [],
+  "comments": [
     {
-      "id": 0,
-      "title": "ㅈㄷㄱㅈㄷㄱ",
-      "body": "ㄴㅇㄹㄴㅇㄹ"
+      "id": 1
     }
   ]
 }

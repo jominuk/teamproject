@@ -47,25 +47,24 @@ const todosSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(__editTodo, (state, action) => {
-        state.todo = state.todos.map((user) =>
-          user.id === action.payload ? action.payload : user
-        );
+      .addCase(__editTodo.pending, (state) => {
+        state.isLoading = true; //네트워크 요청이 시작되면 로딩상태를 true로 변경
       })
-      .addCase();
+      .addCase(__editTodo.fulfilled, (state, action) => {
+        state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
+        state.todos = state.todos.map((user) =>
+          user.id === action.payload ? action.payload : user
+        ); // Store에 있는 todos에 서버에서 가져온 todos를 넣는다.
+      })
+      .addCase(__editTodo.rejected, (state, action) => {
+        state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경
+        state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
+      });
   },
 
   // 내가 비동기 작업을 하는 동안에 클라이언트한테 제공해줄 로직
   // 내가 비동기 작업이 끝나고 제공해줄 로직
   // 내가 비동기 작업을 하면서 에러가 났을 때 클라이언트한테 제공해줄 로직
-
-  // extraReducers: {
-  //   [__editTodo.fulfilled]: (state, action) => {
-  //     state.todos = state.todos.map((user) =>
-  //       user.id === action.payload ? { ...user, isDone: !user.isDone } : user
-  //     );
-  //   },
-  // },
 });
 
 export const { addTodo, deleteTodo, toggleStatusTodo, getTodoByID } =
