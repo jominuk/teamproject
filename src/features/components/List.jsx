@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import ListOfList from "./ListOfList.jsx";
-import { __getTodos } from "../../../redux/modules/todosSlice.js";
+import { __getTodos } from "../../redux/modules/todosSlice.js";
 
 const List = () => {
   const dispatch = useDispatch();
@@ -17,14 +17,7 @@ const List = () => {
       <StListWrapper>
         {todos.map((todo) => {
           if (todo.isDone === false) {
-            return (
-              <ListOfList
-                todo={todo}
-                key={todo.id}
-                borderColor="teal"
-                backgroundColor="white"
-              />
-            );
+            return <ListOfList todo={todo} key={todo.id} borderColor="teal" backgroundColor="white" />;
           } else {
             return null;
           }
@@ -34,14 +27,7 @@ const List = () => {
       <StListWrapper>
         {todos.map((todo) => {
           if (todo.isDone === true) {
-            return (
-              <ListOfList
-                todo={todo}
-                key={todo.id}
-                borderColor="red"
-                backgroundColor="#eee"
-              />
-            );
+            return <ListOfList todo={todo} key={todo.id} borderColor="red" backgroundColor="#eee" />;
           } else {
             return null;
           }

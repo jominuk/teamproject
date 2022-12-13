@@ -1,6 +1,6 @@
 import React from "react";
-import List from "../features/todos/components/List";
-import Form from "../features/todos/components/Form";
+import Form from "../features/components/Form";
+import List from "../features/components/List";
 
 const Home = () => {
   return (

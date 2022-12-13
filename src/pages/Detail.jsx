@@ -11,7 +11,7 @@ import StButton from "../components/Buttons/StButton.jsx";
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const todo = useSelector((state) => state.todos.todo);
+  const todo = useSelector((state) => state.todos);
   const [comment, setComment] = useState({ commentBody: "" });
 
   const { id } = useParams();
@@ -30,7 +30,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    dispatch(getTodoByID(+id));
+    dispatch(getTodoByID(id));
   }, [dispatch, id]);
 
   useEffect(() => {
