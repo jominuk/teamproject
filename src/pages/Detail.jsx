@@ -12,7 +12,7 @@ const Detail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getTodoByID(id));
+    dispatch(getTodoByID(+id));
   }, [dispatch, id]);
 
   return (

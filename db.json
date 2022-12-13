@@ -1,0 +1,17 @@
+{
+  "todos": [
+    {
+      "id": 0,
+      "title": "some comment",
+      "body": "Gkgkgks",
+      "isDone": true
+    }
+  ],
+  "comments": [
+    {
+      "id": 0,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
+}
