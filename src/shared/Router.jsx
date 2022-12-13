@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Header from "../components/ui/Header";
 import Layout from "../components/ui/Layout";
 import NotFound from "../pages/NotFound";
+import AddTodo from "../pages/AddTodo";
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/add" element={<AddTodo />} />
           <Route path="/:id" element={<Detail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
