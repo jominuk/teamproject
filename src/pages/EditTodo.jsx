@@ -16,12 +16,10 @@ const EditTodo = () => {
     setInput({ ...input, [name]: value });
   };
 
-  const editSubmit = (event) => {
-    event.preventDefault();
-
+  const editSubmit = () => {
     dispatch(
       __editTodo({
-        id: 0,
+        id: todo.id,
         title: input.title,
         body: input.body,
       })
@@ -42,9 +40,7 @@ const EditTodo = () => {
               홈으로
             </StButton>
 
-            <form onSubmit={editSubmit}>
-              <StButton>수정완료</StButton>
-            </form>
+            <StButton onClick={editSubmit}>수정완료</StButton>
           </StboxHeader>
 
           <StTitle>

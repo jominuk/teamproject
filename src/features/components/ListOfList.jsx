@@ -1,27 +1,22 @@
-import React from "react";
-import {
-  deleteTodo,
-  toggleStatusTodo,
-} from "../../../redux/modules/todosSlice.js";
+import React, { useEffect } from "react";
+import { __deleteTodo, __toggleStatusTodo } from "../../redux/modules/todosSlice.js";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import StButton from "../../../components/Buttons/StButton.jsx";
+import StButton from "../../components/Buttons/StButton.jsx";
 
 const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   const dispatch = useDispatch();
   const onDeleteTodo = (id) => {
-    dispatch(deleteTodo(id));
+    dispatch(__deleteTodo(id));
   };
 
-  const onToggleStatusTodo = (id) => {
-    dispatch(toggleStatusTodo(id));
+  const onToggleStatusTodo = ({ id, isDone }) => {
+    console.log(id, isDone);
+    dispatch(__toggleStatusTodo({ id, isDone }));
   };
   return (
-    <StTodoContainer
-      borderColor={borderColor}
-      backgroundColor={backgroundColor}
-    >
+    <StTodoContainer borderColor={borderColor} backgroundColor={backgroundColor}>
       <StLink to={`/${todo.id}`} key={todo.id}>
         <div>상세보기</div>
       </StLink>
@@ -33,12 +28,7 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
         <StButton width="50%" height="40px" borderColor="red" onClick={() => onDeleteTodo(todo.id)}>
           삭제하기
         </StButton>
-        <StButton
-          width="50%"
-          height="40px"
-          borderColor="green"
-          onClick={() => onToggleStatusTodo(todo.id)}
-        >
+        <StButton width="50%" height="40px" borderColor="green" onClick={() => onToggleStatusTodo({ id: todo.id, isDone: todo.isDone })}>
           {todo.isDone ? "취소" : "완료"}
         </StButton>
       </StDialogFooter>

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { addComments } from "../redux/modules/commentsSlice.js";
+import {
+  __getComments,
+  __addComments,
+} from "../redux/modules/commentsSlice.js";
 import { getTodoByID } from "../redux/modules/todosSlice.js";
 // import { editTodo } from "../redux/modules/todosSlice";
 import StButton from "../components/Buttons/StButton.jsx";
@@ -10,18 +13,20 @@ import StButton from "../components/Buttons/StButton.jsx";
 const Detail = () => {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todos.todo);
+  const { comments } = useSelector((state) => state.comments);
+  console.log(comments);
+
   const [comment, setComment] = useState({ commentBody: "" });
 
   const { id } = useParams();
   const navigate = useNavigate();
 
   const onClickHandler = (e) => {
-    e.preventDefault();
-    if (!comment.comment) return;
+    if (!comment.commentBody) return;
     dispatch(
-      addComments({
-        commentId: Math.floor(Math.random() * 10000),
-        ...todo,
+      __addComments({
+        comment: comment.commentBody,
+        postId: id,
         isDone: false,
       })
     );
@@ -30,11 +35,8 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getTodoByID(id));
+    dispatch(__getComments());
   }, [dispatch, id]);
-
-  // useEffect(() => {
-  //   dispatch(addComments());
-  // }, [dispatch]);
 
   return (
     <>
@@ -74,7 +76,7 @@ const Detail = () => {
         <StCommentInput
           type="text"
           name="commentBody"
-          value={comment.commentBody}
+          value={comment.commentBody || ""}
           onChange={(e) => {
             const { value } = e.target;
             setComment({
@@ -94,19 +96,24 @@ const Detail = () => {
       </StCommentInputGroup>
 
       <StCommentContainer>
-        <StComment>
-          <div>2022-12-12</div>
-          <div>내용이 들어갑니다~~~~</div>
+        {comments?.map((el) => {
+          console.log(el);
+          return (
+            <StComment key={`comment_${el.id}`}>
+              <div>2022-12-12</div>
+              <div>{el.comment}</div>
 
-          <StButtonGroup>
-            <StButton borderColor="teal" width="50px" height="30px">
-              수정
-            </StButton>
-            <StButton borderColor="red" width="50px" height="30px">
-              삭제
-            </StButton>
-          </StButtonGroup>
-        </StComment>
+              <StButtonGroup>
+                <StButton borderColor="teal" width="50px" height="30px">
+                  수정
+                </StButton>
+                <StButton borderColor="red" width="50px" height="30px">
+                  삭제
+                </StButton>
+              </StButtonGroup>
+            </StComment>
+          );
+        })}
       </StCommentContainer>
     </>
   );

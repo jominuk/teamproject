@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import ListOfList from "./ListOfList.jsx";
+import { __getTodos } from "../../redux/modules/todosSlice.js";
 
 const List = () => {
+  const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.todos);
+
+  console.log(todos);
+  useEffect(() => {
+    dispatch(__getTodos());
+  }, []);
 
   return (
     <StListContainer>
