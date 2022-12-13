@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getComments, addComments } from "../redux/modules/commentsSlice.js";
+import {
+  __getComments,
+  __addComments,
+} from "../redux/modules/commentsSlice.js";
 import { getTodoByID } from "../redux/modules/todosSlice.js";
 import StButton from "../components/Buttons/StButton.jsx";
 
@@ -15,12 +18,11 @@ const Detail = () => {
   const navigate = useNavigate();
 
   const onClickHandler = (e) => {
-    e.preventDefault();
-    if (!comment.comment) return;
+    if (!comment.commentBody) return;
     dispatch(
-      addComments({
-        commentId: Math.floor(Math.random() * 10000),
-        ...todo,
+      __addComments({
+        comment: comment.commentBody,
+        postId: id,
         isDone: false,
       })
     );
@@ -32,7 +34,7 @@ const Detail = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(addComments());
+    dispatch(__getComments());
   }, [dispatch]);
 
   return (
@@ -75,7 +77,7 @@ const Detail = () => {
         <StCommentInput
           type="text"
           name="commentBody"
-          value={comment.commentBody}
+          value={comment.commentBody || ""}
           onChange={(e) => {
             const { value } = e.target;
             setComment({
@@ -95,9 +97,10 @@ const Detail = () => {
       </StCommentInputGroup>
 
       <StCommentContainer>
+        {/* {comments.map((comment) => (key={comments.id}{commdnts.comment}))} */}
         <StComment>
           <div>2022-12-12</div>
-          <div>내용이 들어갑니다~~~~</div>
+          <div>내용이 들어갑니다</div>
 
           <StButtonGroup>
             <StButton borderColor="teal" width="50px" height="30px">
