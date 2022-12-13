@@ -9,9 +9,10 @@
   ],
   "comments": [
     {
-      "id": 0,
-      "body": "some comment",
-      "postId": 1
+      "comment": "sdff",
+      "postId": "id7",
+      "isDone": false,
+      "id": "K-Srkpc"
     }
   ]
 }
