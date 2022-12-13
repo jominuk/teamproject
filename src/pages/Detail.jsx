@@ -30,7 +30,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    dispatch(getTodoByID(id));
+    dispatch(getTodoByID(+id));
   }, [dispatch, id]);
 
   useEffect(() => {
