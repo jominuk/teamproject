@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import {
   __deleteTodo,
   __toggleStatusTodo,
-} from "../../../redux/modules/todosSlice.js";
+} from "../../redux/modules/todosSlice.js";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import StButton from "../../../components/Buttons/StButton.jsx";
+import StButton from "../../components/Buttons/StButton.jsx";
 
 const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   };
 
   const onToggleStatusTodo = ({ id, isDone }) => {
-    console.log(id, isDone);
     dispatch(__toggleStatusTodo({ id, isDone }));
   };
   return (
