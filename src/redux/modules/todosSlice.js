@@ -17,9 +17,8 @@ export const __getTodoByID = createAsyncThunk(
   "GET_TODO_BY_ID",
   async (payload, thunkAPI) => {
     try {
-      const todoList = await axios.get("http://localhost:3001/todos");
-      const todo = todoList.data.filter((el) => el.id === payload)[0];
-      return thunkAPI.fulfillWithValue(todo);
+      const todo = await axios.get(`http://localhost:3001/todos/${payload}`);
+      return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -126,7 +125,6 @@ const todosSlice = createSlice({
 
     //get 상세페이지
     [__getTodoByID.pending]: (state) => {
-      console.log("팬딩");
       state.isLoading = true;
     },
     [__getTodoByID.fulfilled]: (state, action) => {
