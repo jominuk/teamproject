@@ -39,7 +39,7 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getTodoByID(id));
-    dispatch(__getComments());
+    dispatch(__getComments(id));
   }, [dispatch, id]);
 
   return (
