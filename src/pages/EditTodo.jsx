@@ -27,10 +27,6 @@ const EditTodo = () => {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   dispatch(__editTodo);
-  // }, []);
-
   return (
     <StlayoutBox>
       <Stbox>

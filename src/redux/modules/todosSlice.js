@@ -4,7 +4,6 @@ import axios from "axios";
 export const __addTodos = createAsyncThunk(
   "ADD_TODO",
   async (todo, thunkAPI) => {
-    console.log(todo);
     try {
       await axios.post("http://localhost:3001/todos", todo);
       return thunkAPI.fulfillWithValue(todo);
@@ -18,7 +17,6 @@ export const __getTodos = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get("http://localhost:3001/todos");
-      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -48,7 +46,7 @@ export const __deleteTodo = createAsyncThunk(
       await axios.delete(`http://localhost:3001/todos/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
-      console.log("에러는", err);
+      // console.log("에러는", err);
       //서버에러 =>
       return thunkAPI.rejectWithValue(err);
     }
@@ -59,7 +57,7 @@ export const __editTodo = createAsyncThunk(
   "editTodo",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+      // console.log(payload);
       await axios.patch(`http://localhost:3001/todos/${payload.id}`, {
         title: payload.title,
         body: payload.body,
@@ -67,6 +65,18 @@ export const __editTodo = createAsyncThunk(
       return thunkAPI.fulfillWithValue(payload); // 프로미스가 잘 성공적으로 실행되었는지, fulfilled
     } catch (error) {
       return thunkAPI.rejectWithValue(error); //  실패가 되었는지, rejected
+    }
+  }
+);
+
+export const getTodoByID = createAsyncThunk(
+  "DETAIL_TODOS",
+  async (id, thunkAPI) => {
+    try {
+      const detail = await axios.get(`http://localhost:3001/todos/${id}`);
+      return thunkAPI.fulfillWithValue(detail.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -81,21 +91,14 @@ const initialState = {
 const todosSlice = createSlice({
   name: "todos",
   initialState,
-  reducers: {
-    getTodoByID: (state, action) => {
-      console.log(state.todos);
-      state.todo = state.todos.filter((el) => action.payload === el.id)[0];
-    },
-  },
+  reducers: {},
   extraReducers: {
     //get
     [__getTodos.pending]: (state) => {
-      console.log("팬딩중");
       state.isLoading = true;
     },
     [__getTodos.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
       state.todos = action.payload;
     },
     [__getTodos.rejected]: (state, action) => {
@@ -144,6 +147,19 @@ const todosSlice = createSlice({
       state.error = action.payload;
     },
 
+    //상세페이지 ID
+    [getTodoByID.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getTodoByID.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.todo = action.payload;
+    },
+    [getTodoByID.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     //상세 페이지 수정
     [__editTodo.pending]: (state) => {
       state.isLoading = true;
@@ -182,5 +198,5 @@ const todosSlice = createSlice({
   // 내가 비동기 작업을 하면서 에러가 났을 때 클라이언트한테 제공해줄 로직
 });
 
-export const { deleteTodo, getTodoByID } = todosSlice.actions;
+export const { deleteTodo } = todosSlice.actions;
 export default todosSlice.reducer;

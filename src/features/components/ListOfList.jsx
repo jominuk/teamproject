@@ -1,4 +1,4 @@
-// import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   __deleteTodo,
   __toggleStatusTodo,
@@ -15,9 +15,9 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   };
 
   const onToggleStatusTodo = ({ id, isDone }) => {
-    console.log(id, isDone);
     dispatch(__toggleStatusTodo({ id, isDone }));
   };
+
   return (
     <StTodoContainer
       borderColor={borderColor}
