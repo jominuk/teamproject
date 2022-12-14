@@ -41,7 +41,7 @@ const Detail = () => {
         <StDialog>
           <div>
             <StDialogHeader>
-              <div>ID :{todo?.id}</div>
+              <div>ID :{todo.id}</div>
               <StButtonGroup>
                 <StButton
                   borderColor="black"

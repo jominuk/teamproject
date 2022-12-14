@@ -30,7 +30,6 @@ export const __getTodos = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get("http://localhost:3001/todos");
-
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -73,9 +72,21 @@ export const __editTodo = createAsyncThunk(
         title: payload.title,
         body: payload.body,
       });
-      return thunkAPI.fulfillWithValue(payload); // 프로미스가 잘 성공적으로 실행되었는지, fulfilled
+      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error); //  실패가 되었는지, rejected
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getTodoByID = createAsyncThunk(
+  "DETAIL_TODOS",
+  async (id, thunkAPI) => {
+    try {
+      const detail = await axios.get(`http://localhost:3001/todos/${id}`);
+      return thunkAPI.fulfillWithValue(detail.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -91,24 +102,6 @@ const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {},
-
-  //그래프 QL!! ===? 서버도 그래프ql로 구현되야 가능 -> 노마드코더 무료강의 추천 (서버, 프론트 )
-
-  // extraReducers:(builder)=>{
-  //   builder
-  //   .addCase(__getTodos.pending,(state) => {
-  //     state.isLoading = true;
-  //   })
-  //   .addCase(__getTodos.fulfilled,(state,action) => {
-  //     state.isLoading = false;
-  //     state.todos = action.payload;
-  //   })
-  //   .addCase(__getTodos.rejected,(state,action) => {
-  //     state.isLoading = false;
-  //     state.error = action.payload;
-  //   })
-  // }
-
   extraReducers: {
     //get
     [__getTodos.pending]: (state) => {
@@ -178,6 +171,18 @@ const todosSlice = createSlice({
       state.error = action.payload;
     },
 
+    [getTodoByID.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getTodoByID.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.todo = action.payload;
+    },
+    [getTodoByID.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     //상세 페이지 수정
     [__editTodo.pending]: (state) => {
       state.isLoading = true;
@@ -193,27 +198,6 @@ const todosSlice = createSlice({
       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
     },
   },
-
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(__editTodo.pending, (state) => {
-  //       state.isLoading = true; //네트워크 요청이 시작되면 로딩상태를 true로 변경
-  //     })
-  //     .addCase(__editTodo.fulfilled, (state, action) => {
-  //       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
-  //       state.todos = state.todos.map((user) =>
-  //         user.id === action.payload ? action.payload : user
-  //       ); // Store에 있는 todos에 서버에서 가져온 todos를 넣는다.
-  //     })
-  //     .addCase(__editTodo.rejected, (state, action) => {
-  //       state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경
-  //       state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
-  //     });
-  // },
-
-  // 내가 비동기 작업을 하는 동안에 클라이언트한테 제공해줄 로직
-  // 내가 비동기 작업이 끝나고 제공해줄 로직
-  // 내가 비동기 작업을 하면서 에러가 났을 때 클라이언트한테 제공해줄 로직
 });
 
 export default todosSlice.reducer;

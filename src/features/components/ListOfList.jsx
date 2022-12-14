@@ -17,6 +17,7 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   const onToggleStatusTodo = ({ id, isDone }) => {
     dispatch(__toggleStatusTodo({ id, isDone }));
   };
+
   return (
     <StTodoContainer
       borderColor={borderColor}
@@ -26,8 +27,16 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
         <div>상세보기</div>
       </StLink>
       <div>
-        <h2 className="todo-title">{todo.title}</h2>
-        <div>{todo.body}</div>
+        <h2 className="todo-title">
+          {todo.title.length > 14
+            ? todo.title.substring(0, 14) + "..."
+            : todo.title}
+        </h2>
+        <div>
+          {todo.body.length > 40
+            ? todo.body.substring(0, 40) + "..."
+            : todo.body}
+        </div>
       </div>
       <StDialogFooter>
         <StButton
