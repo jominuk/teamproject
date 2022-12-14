@@ -25,8 +25,8 @@ export const __getComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get("http://localhost:3001/comments");
-
-      return thunkAPI.fulfillWithValue(data.data);
+      const response = data.data.filter((el) => el.postId === payload);
+      return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       // console.log(error);
       return thunkAPI.rejectWithValue(error);
@@ -89,7 +89,6 @@ const commentsSlice = createSlice({
     },
     [__deleteComments.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // console.log(action.payload);
       state.comments = state.comments.filter(
         (item) => item.id !== action.payload
       );

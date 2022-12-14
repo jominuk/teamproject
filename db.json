@@ -4,31 +4,25 @@
       "id": "todos_1670992606566.1055",
       "title": "asdsa",
       "body": "asdasd",
-      "isDone": false
+      "isDone": true
     },
     {
       "id": "todos_1670992800628.861",
-      "title": "순대국",
-      "body": "순대국 먹쟈 ",
+      "title": "ㅇㄹㅇㄹ",
+      "body": "ㄴㅇㄹㄴㅇ",
       "isDone": false
     },
     {
-      "id": "todos_1671003298745.9766",
-      "title": "좋아좋아",
-      "body": "좋다좋다",
+      "id": "todos_1671007613147.2268",
+      "title": "순대국 짱짱",
+      "body": "라면 뿌셔먹고 짱짱",
       "isDone": false
     }
   ],
   "comments": [
     {
-      "comment": "asdasdsadasd",
-      "id": "comments_1671002725643.794",
-      "postId": "todos_1670992606566.1055",
-      "isDone": false
-    },
-    {
-      "comment": "수정이될까?",
-      "id": "comments_1671004264936.0288",
+      "comment": "ㅋㅌㅋㅌ",
+      "id": "comments_1671006999936.7515",
       "postId": "todos_1670992800628.861",
       "isDone": false
     }
