@@ -7,14 +7,12 @@ import {
   __addComments,
 } from "../redux/modules/commentsSlice.js";
 import { getTodoByID } from "../redux/modules/todosSlice.js";
-// import { editTodo } from "../redux/modules/todosSlice";
 import StButton from "../components/Buttons/StButton.jsx";
 
 const Detail = () => {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todos.todo);
   const { comments } = useSelector((state) => state.comments);
-  console.log(comments);
 
   const [comment, setComment] = useState({ commentBody: "" });
 
@@ -97,7 +95,7 @@ const Detail = () => {
 
       <StCommentContainer>
         {comments?.map((el) => {
-          console.log(el);
+          // console.log(el);
           return (
             <StComment key={`comment_${el.id}`}>
               <div>2022-12-12</div>

@@ -24,7 +24,12 @@ const EditTodo = () => {
         body: input.body,
       })
     );
+    navigate("/");
   };
+
+  // useEffect(() => {
+  //   dispatch(__editTodo);
+  // }, []);
 
   return (
     <StlayoutBox>
@@ -50,6 +55,7 @@ const EditTodo = () => {
               name="title"
               value={input.title}
               onChange={onChangeHandler}
+              placeholder=" 수정 제목을 입력해줘요 "
             />
           </StTitle>
 
@@ -60,6 +66,7 @@ const EditTodo = () => {
               name="body"
               value={input.body}
               onChange={onChangeHandler}
+              placeholder=" 수정 내용을 입력해줘요 "
             />
           </StContent>
 
