@@ -6,18 +6,22 @@ import {
   __getComments,
   __addComments,
 } from "../redux/modules/commentsSlice.js";
-import { getTodoByID } from "../redux/modules/todosSlice.js";
+import { __getTodoByID, __getTodos } from "../redux/modules/todosSlice.js";
 import StButton from "../components/Buttons/StButton.jsx";
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const todo = useSelector((state) => state.todos.todo);
+  const navigate = useNavigate();
   const { comments } = useSelector((state) => state.comments);
-
   const [comment, setComment] = useState({ commentBody: "" });
 
   const { id } = useParams();
-  const navigate = useNavigate();
+  const todo = useSelector((state) => state.todos.todo);
+
+  useEffect(() => {
+    dispatch(__getTodoByID(id)); // 필터로 가져오는거고
+    // dispatch(__getComments()); //
+  }, [dispatch, id]);
 
   const onClickHandler = (e) => {
     if (!comment.commentBody) return;
@@ -31,26 +35,19 @@ const Detail = () => {
     setComment("");
   };
 
-  useEffect(() => {
-    dispatch(getTodoByID(id));
-    dispatch(__getComments());
-  }, [dispatch, id]);
-
   return (
     <>
       <StContainer>
         <StDialog>
           <div>
             <StDialogHeader>
-              <div>ID :{todo.id}</div>
+              <div>ID :{todo?.id}</div>
               <StButtonGroup>
                 <StButton
                   borderColor="black"
                   width="70px"
                   height="50px"
-                  onClick={() => {
-                    navigate("/");
-                  }}
+                  onClick={() => navigate("/EditTodo")}
                 >
                   수정하기
                 </StButton>
@@ -66,8 +63,8 @@ const Detail = () => {
                 </StButton>
               </StButtonGroup>
             </StDialogHeader>
-            <StTitle>{todo.title}</StTitle>
-            <StBody>{todo.body}</StBody>
+            <StTitle>{todo?.title}</StTitle>
+            <StBody>{todo?.body}</StBody>
           </div>
         </StDialog>
       </StContainer>

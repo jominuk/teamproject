@@ -7,6 +7,7 @@ import { __getTodos } from "../../redux/modules/todosSlice.js";
 const List = () => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.todos);
+
   useEffect(() => {
     dispatch(__getTodos());
   }, []);
@@ -17,7 +18,14 @@ const List = () => {
       <StListWrapper>
         {todos.map((todo) => {
           if (todo.isDone === false) {
-            return <ListOfList todo={todo} key={todo.id} borderColor="teal" backgroundColor="white" />;
+            return (
+              <ListOfList
+                todo={todo}
+                key={todo.id}
+                borderColor="teal"
+                backgroundColor="white"
+              />
+            );
           } else {
             return null;
           }
@@ -27,7 +35,14 @@ const List = () => {
       <StListWrapper>
         {todos.map((todo) => {
           if (todo.isDone === true) {
-            return <ListOfList todo={todo} key={todo.id} borderColor="red" backgroundColor="#eee" />;
+            return (
+              <ListOfList
+                todo={todo}
+                key={todo.id}
+                borderColor="red"
+                backgroundColor="#eee"
+              />
+            );
           } else {
             return null;
           }

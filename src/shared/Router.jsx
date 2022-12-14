@@ -6,6 +6,7 @@ import Header from "../components/ui/Header";
 import Layout from "../components/ui/Layout";
 import NotFound from "../pages/NotFound";
 import AddTodo from "../pages/AddTodo";
+import EditTodo from "../pages/EditTodo";
 
 const Router = () => {
   return (
@@ -16,6 +17,9 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<AddTodo />} />
           <Route path="/:id" element={<Detail />} />
+          <Route path="/EditTodo" element={<EditTodo />}>
+            {/* <Route path="/:id"  /> */}
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

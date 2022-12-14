@@ -1,42 +1,34 @@
 {
   "todos": [
     {
-      "id": "todos_1670931039894.5078",
-      "title": "asg",
-      "body": "asgasg",
-      "isDone": false
-    },
-    {
-      "id": "todos_1670937629753.7212",
-      "title": "안녕하하",
-      "body": "1234",
-      "isDone": true
-    },
-    {
-      "id": "todos_1670938703909.8179",
-      "title": "김태현",
-      "body": "나하",
+      "id": "todos_1670945293085",
+      "title": "asdf",
+      "body": "asdfasdf",
       "isDone": true
     }
   ],
   "comments": [
     {
-      "comment": "ㄴㅇㄹ",
-      "postId": "id7",
+      "comment": "김해",
+      "postId": "todos_1670939378182.5593",
       "isDone": false,
-      "id": "39AfJhr"
+      "id": 1
     },
     {
-      "comment": "ㄴㅇㄹ",
-      "postId": "todos_1670928841397.694",
+      "comment": "f",
+      "postId": "todos_1670940846679",
       "isDone": false,
-      "id": "Uw-_IHY"
+      "id": 2
     },
     {
-      "comment": "ㄴㅇㄹㄴㅇ",
-      "postId": "todos_1670935427063.3162",
+      "postId": "todos_1670940846679",
       "isDone": false,
-      "id": "UMYMpS2"
+      "id": 3
+    },
+    {
+      "postId": "todos_1670940846679",
+      "isDone": false,
+      "id": 4
     }
   ]
 }

@@ -23,7 +23,7 @@ const AddTodo = () => {
     if (input.title.trim() === "" || input.body.trim() === "") return;
     dispatch(
       __addTodos({
-        id: `todos_${new Date().getTime() + Math.random()}`,
+        id: `todos_${Math.floor(new Date().getTime() + Math.random())}`,
         title: input.title,
         body: input.body,
         isDone: false,
@@ -40,10 +40,27 @@ const AddTodo = () => {
     <Addcontainer>
       <AddBox>
         <form onSubmit={onSubmitHandler}>
-          <TitleInput type="text" name="title" value={input.title} onChange={onChangeHandler} placeholder="제목을 작성해주세요" />
-          <BodoyInput type="text" name="body" value={input.body} onChange={onChangeHandler} placeholder="내용을 작성해주세요" />
+          <TitleInput
+            type="text"
+            name="title"
+            value={input.title}
+            onChange={onChangeHandler}
+            placeholder="제목을 작성해주세요"
+          />
+          <BodoyInput
+            type="text"
+            name="body"
+            value={input.body}
+            onChange={onChangeHandler}
+            placeholder="내용을 작성해주세요"
+          />
           <BtnBox>
-            <StButton width="13rem" height="40px" borderColor="blue" type="submit">
+            <StButton
+              width="13rem"
+              height="40px"
+              borderColor="blue"
+              type="submit"
+            >
               버킷 추가하기
             </StButton>
             <StButton
