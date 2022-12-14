@@ -34,6 +34,15 @@ export const __getComments = createAsyncThunk(
   }
 );
 
+// export const __deleteComments = createAsyncThunk(
+//   "deleteComments",
+//   async (payload, thunkAPI) => {
+//     try {
+//       await axios.delete(`http://localhost:3001/comments`)
+//     }
+//   }
+// )
+
 const commentsSlice = createSlice({
   name: "comments",
   initialState,

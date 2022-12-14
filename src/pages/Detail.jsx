@@ -14,7 +14,6 @@ const Detail = () => {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todos.todo);
   const { comments } = useSelector((state) => state.comments);
-  console.log(comments);
 
   const [comment, setComment] = useState({ commentBody: "" });
 
@@ -100,7 +99,7 @@ const Detail = () => {
           console.log(el);
           return (
             <StComment key={`comment_${el.id}`}>
-              <div>2022-12-12</div>
+              <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
               <div>{el.comment}</div>
 
               <StButtonGroup>
@@ -147,9 +146,25 @@ const StDialogHeader = styled.div`
   align-items: center;
 `;
 
-const StButtonGroup = styled.div`
+const StComment = styled.div`
+  width: 60%;
+  border: 2px solid teal;
+  height: 15px;
+  border-radius: 12px;
+  padding: 12px 24px 24px 24px;
   display: flex;
   align-items: center;
+  justify-content: space-around;
+`;
+
+const StCalendar = styled.div`
+  width: 20%;
+`;
+const StButtonGroup = styled.div`
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
   gap: 20px;
 `;
 
@@ -178,17 +193,9 @@ const StCommentInputGroup = styled.div`
 
 const StCommentContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-const StComment = styled.div`
-  width: 70%;
-  border: 2px solid teal;
-  height: 20px;
-  border-radius: 12px;
-  padding: 12px 24px 24px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  gap: 15px;
+  padding: 15px;
 `;

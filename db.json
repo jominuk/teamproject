@@ -1,17 +1,17 @@
 {
-  "todos": [
+  "todos": [],
+  "comments": [
     {
-      "id": "todos_1670937838457.95",
-      "title": "조민욱",
-      "body": "조민욱",
-      "isDone": false
+      "comment": "ㄴㅇㄹ",
+      "postId": "todos_1670937838457.95",
+      "isDone": false,
+      "id": 14
     },
     {
-      "id": "todos_1670938030586.7727",
-      "title": "좀니욱",
-      "body": "저ㅗ마너워ㅏㅇ",
-      "isDone": true
+      "comment": "ㄴㅇㄹ",
+      "postId": "todos_1670939366957.3337",
+      "isDone": false,
+      "id": 15
     }
-  ],
-  "comments": []
+  ]
 }
