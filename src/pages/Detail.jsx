@@ -15,6 +15,7 @@ const Detail = () => {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todos.todo);
   const { comments } = useSelector((state) => state.comments);
+
   const [comment, setComment] = useState({ commentBody: "" });
 
   const { id } = useParams();
