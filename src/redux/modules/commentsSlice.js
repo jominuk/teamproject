@@ -25,7 +25,7 @@ export const __getComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get("http://localhost:3001/comments");
-      // console.log(data);
+
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       // console.log(error);
@@ -34,20 +34,24 @@ export const __getComments = createAsyncThunk(
   }
 );
 
-// export const __deleteComments = createAsyncThunk(
-//   "deleteComments",
-//   async (payload, thunkAPI) => {
-//     try {
-//       await axios.delete(`http://localhost:3001/comments`)
-//     }
-//   }
-// )
+export const __deleteComments = createAsyncThunk(
+  "deleteComments",
+  async (payload, thunkAPI) => {
+    try {
+      await axios.delete(`http://localhost:3001/comments/${payload}`);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 const commentsSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {},
   extraReducers: {
+    //add
     [__addComments.pending]: (state, action) => {
       state.isLoading = true;
       // console.log("pending :", action);
@@ -64,6 +68,7 @@ const commentsSlice = createSlice({
       // console.log("rejected :", action);
     },
 
+    //get
     [__getComments.pending]: (state, action) => {
       state.isLoading = true;
       // console.log("pending :", action);
@@ -74,6 +79,22 @@ const commentsSlice = createSlice({
       state.comments = action.payload;
     },
     [__getComments.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    //delete
+    [__deleteComments.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [__deleteComments.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      // console.log(action.payload);
+      state.comments = state.comments.filter(
+        (item) => item.id !== action.payload
+      );
+    },
+    [__deleteComments.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

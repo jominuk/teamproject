@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   __getComments,
   __addComments,
+  __deleteComments,
 } from "../redux/modules/commentsSlice.js";
 import { getTodoByID } from "../redux/modules/todosSlice.js";
 // import { editTodo } from "../redux/modules/todosSlice";
@@ -14,17 +15,20 @@ const Detail = () => {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todos.todo);
   const { comments } = useSelector((state) => state.comments);
-
   const [comment, setComment] = useState({ commentBody: "" });
 
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const onDeleteComment = (id) => {
+    dispatch(__deleteComments(id));
+  };
   const onClickHandler = (e) => {
     if (!comment.commentBody) return;
     dispatch(
       __addComments({
         comment: comment.commentBody,
+        id: `comments_${new Date().getTime() + Math.random()}`,
         postId: id,
         isDone: false,
       })
@@ -43,7 +47,7 @@ const Detail = () => {
         <StDialog>
           <div>
             <StDialogHeader>
-              <div>ID :{todo.id}</div>
+              <div>ID :{todo?.id}</div>
               <StButtonGroup>
                 <StButton
                   borderColor="black"
@@ -65,8 +69,8 @@ const Detail = () => {
                 </StButton>
               </StButtonGroup>
             </StDialogHeader>
-            <StTitle>{todo.title}</StTitle>
-            <StBody>{todo.body}</StBody>
+            <StTitle>{todo?.title}</StTitle>
+            <StBody>{todo?.body}</StBody>
           </div>
         </StDialog>
       </StContainer>
@@ -96,7 +100,6 @@ const Detail = () => {
 
       <StCommentContainer>
         {comments?.map((el) => {
-          console.log(el);
           return (
             <StComment key={`comment_${el.id}`}>
               <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
@@ -106,7 +109,12 @@ const Detail = () => {
                 <StButton borderColor="teal" width="50px" height="30px">
                   수정
                 </StButton>
-                <StButton borderColor="red" width="50px" height="30px">
+                <StButton
+                  borderColor="red"
+                  width="50px"
+                  height="30px"
+                  onClick={() => onDeleteComment(el.id)}
+                >
                   삭제
                 </StButton>
               </StButtonGroup>
