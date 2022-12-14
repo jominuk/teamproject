@@ -147,6 +147,7 @@ const todosSlice = createSlice({
       state.error = action.payload;
     },
 
+    //상세페이지 ID
     [getTodoByID.pending]: (state) => {
       state.isLoading = true;
     },

@@ -8,7 +8,6 @@ import {
   __deleteComments,
 } from "../redux/modules/commentsSlice.js";
 import { getTodoByID } from "../redux/modules/todosSlice.js";
-// import { editTodo } from "../redux/modules/todosSlice";
 import StButton from "../components/Buttons/StButton.jsx";
 
 const Detail = () => {
@@ -101,6 +100,7 @@ const Detail = () => {
 
       <StCommentContainer>
         {comments?.map((el) => {
+          // console.log(el);
           return (
             <StComment key={`comment_${el.id}`}>
               <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
