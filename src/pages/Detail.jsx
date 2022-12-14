@@ -14,7 +14,6 @@ const Detail = () => {
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todos.todo);
   const { comments } = useSelector((state) => state.comments);
-  console.log(comments);
 
   const [comment, setComment] = useState({ commentBody: "" });
 
@@ -44,7 +43,7 @@ const Detail = () => {
         <StDialog>
           <div>
             <StDialogHeader>
-              <div>ID :{todo.id}</div>
+              <div>ID :{todo?.id}</div>
               <StButtonGroup>
                 <StButton
                   borderColor="black"
@@ -66,8 +65,8 @@ const Detail = () => {
                 </StButton>
               </StButtonGroup>
             </StDialogHeader>
-            <StTitle>{todo.title}</StTitle>
-            <StBody>{todo.body}</StBody>
+            <StTitle>{todo?.title}</StTitle>
+            <StBody>{todo?.body}</StBody>
           </div>
         </StDialog>
       </StContainer>
@@ -97,7 +96,6 @@ const Detail = () => {
 
       <StCommentContainer>
         {comments?.map((el) => {
-          console.log(el);
           return (
             <StComment key={`comment_${el.id}`}>
               <div>2022-12-12</div>
