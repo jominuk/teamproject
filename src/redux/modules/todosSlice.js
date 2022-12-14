@@ -46,7 +46,7 @@ export const __deleteTodo = createAsyncThunk(
       await axios.delete(`http://localhost:3001/todos/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
-      console.log("에러는", err);
+      // console.log("에러는", err);
       //서버에러 =>
       return thunkAPI.rejectWithValue(err);
     }
@@ -57,7 +57,7 @@ export const __editTodo = createAsyncThunk(
   "editTodo",
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
+      // console.log(payload);
       await axios.patch(`http://localhost:3001/todos/${payload.id}`, {
         title: payload.title,
         body: payload.body,
