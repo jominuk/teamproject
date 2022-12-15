@@ -12,7 +12,7 @@ export const __addComments = createAsyncThunk(
   async (comment, thunkAPI) => {
     try {
       await axios.post(
-        "https://json-server-vercel-tau.vercel.app/comments",
+        "https://mighty-basin-21011.herokuapp.com/comments",
         comment
       );
 
@@ -28,7 +28,7 @@ export const __patchComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.patch(
-        `https://json-server-vercel-tau.vercel.app/comments/${payload.id}`,
+        `https://mighty-basin-21011.herokuapp.com/comments/${payload.id}`,
         {
           comment: payload.comment,
         }
@@ -49,7 +49,7 @@ export const __getComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(
-        "https://json-server-vercel-tau.vercel.app/comments"
+        "https://mighty-basin-21011.herokuapp.com/comments"
       );
       const response = data.data.filter((el) => el.postId === payload);
       return thunkAPI.fulfillWithValue(response);
@@ -64,12 +64,12 @@ export const __deleteCommentByTodoID = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `https://json-server-vercel-tau.vercel.app/comments`
+        `https://mighty-basin-21011.herokuapp.com/comments`
       );
       data.forEach((el) =>
         el.postId === payload
           ? axios.delete(
-              `https://json-server-vercel-tau.vercel.app/comments/${el.id}`
+              `https://mighty-basin-21011.herokuapp.com/comments/${el.id}`
             )
           : null
       );
@@ -80,12 +80,13 @@ export const __deleteCommentByTodoID = createAsyncThunk(
   }
 );
 
+
 export const __deleteComments = createAsyncThunk(
   "deleteComments",
   async (payload, thunkAPI) => {
     try {
       await axios.delete(
-        `https://json-server-vercel-tau.vercel.app/comments/${payload}`
+        `https://mighty-basin-21011.herokuapp.com/comments/${payload}`
       );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
@@ -99,6 +100,7 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+
     //add
     [__addComments.pending]: (state, action) => {
       state.isLoading = true;
@@ -141,6 +143,7 @@ const commentsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
     // 딜리트 커멘트올
     [__deleteCommentByTodoID.pending]: (state, action) => {
       state.isLoading = true;
@@ -155,7 +158,8 @@ const commentsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // 대슥ㄹ 수정하기
+
+    // 댓글 수정하기
     [__patchComment.pending]: (state, action) => {
       state.isLoading = true;
     },
@@ -171,8 +175,6 @@ const commentsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
-    __deleteCommentByTodoID,
   },
 });
 

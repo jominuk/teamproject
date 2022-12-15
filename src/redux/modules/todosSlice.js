@@ -6,7 +6,7 @@ export const __addTodos = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.post(
-        "https://json-server-vercel-tau.vercel.app/posts",
+        "https://mighty-basin-21011.herokuapp.com/todos",
         payload
       );
       return thunkAPI.fulfillWithValue(payload);
@@ -21,7 +21,7 @@ export const __getTodoByID = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const todo = await axios.get(
-        `https://json-server-vercel-tau.vercel.app/posts/${payload}`
+        `https://mighty-basin-21011.herokuapp.com/todos/${payload}`
       );
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
@@ -35,7 +35,7 @@ export const __getTodos = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        "https://json-server-vercel-tau.vercel.app/posts"
+        "https://mighty-basin-21011.herokuapp.com/todos"
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
@@ -50,7 +50,7 @@ export const __toggleStatusTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.patch(
-        `https://json-server-vercel-tau.vercel.app/posts/${payload.id}`,
+        `https://mighty-basin-21011.herokuapp.com/todos/${payload.id}`,
         {
           isDone: !payload.isDone,
         }
@@ -67,7 +67,7 @@ export const __deleteTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.delete(
-        `https://json-server-vercel-tau.vercel.app/posts/${payload}`
+        `https://mighty-basin-21011.herokuapp.com/todos/${payload}`
       );
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
@@ -81,7 +81,7 @@ export const __editTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.patch(
-        `https://json-server-vercel-tau.vercel.app/posts/${payload.id}`,
+        `https://mighty-basin-21011.herokuapp.com/todos/${payload.id}`,
         {
           title: payload.title,
           body: payload.body,
@@ -99,7 +99,7 @@ export const getTodoByID = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const detail = await axios.get(
-        `https://json-server-vercel-tau.vercel.app/posts/${id}`
+        `https://mighty-basin-21011.herokuapp.com/todos/${id}`
       );
       return thunkAPI.fulfillWithValue(detail.data);
     } catch (err) {
