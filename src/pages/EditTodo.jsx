@@ -10,7 +10,6 @@ const EditTodo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const todo = useSelector((state) => state.todos.todo);
-  console.log(todo)
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -28,6 +27,7 @@ const EditTodo = () => {
     );
     navigate("/");
   };
+
 
   return (
     <StlayoutBox>
