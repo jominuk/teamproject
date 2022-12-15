@@ -12,7 +12,7 @@ export const __addComments = createAsyncThunk(
   async (comment, thunkAPI) => {
     try {
       await axios.post(
-        "https://json-server-vercel-tau.vercel.app/comments",
+        "https://json-server-vercel1-bay.vercel.app/comments",
         comment
       );
 
@@ -28,7 +28,7 @@ export const __patchComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.patch(
-        `https://json-server-vercel-tau.vercel.app/comments/${payload.id}`,
+        `https://json-server-vercel1-bay.vercel.app/comments/${payload.id}`,
         {
           comment: payload.comment,
         }
@@ -49,7 +49,7 @@ export const __getComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const data = await axios.get(
-        "https://json-server-vercel-tau.vercel.app/comments"
+        "https://json-server-vercel1-bay.vercel.app/comments"
       );
       const response = data.data.filter((el) => el.postId === payload);
       return thunkAPI.fulfillWithValue(response);
@@ -64,12 +64,12 @@ export const __deleteCommentByTodoID = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `https://json-server-vercel-tau.vercel.app/comments`
+        `https://json-server-vercel1-bay.vercel.app/comments`
       );
       data.forEach((el) =>
         el.postId === payload
           ? axios.delete(
-              `https://json-server-vercel-tau.vercel.app/comments/${el.id}`
+              `https://json-server-vercel1-bay.vercel.app/comments/${el.id}`
             )
           : null
       );
@@ -85,7 +85,7 @@ export const __deleteComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.delete(
-        `https://json-server-vercel-tau.vercel.app/comments/${payload}`
+        `https://json-server-vercel1-bay.vercel.app/comments/${payload}`
       );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
