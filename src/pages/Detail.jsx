@@ -6,19 +6,35 @@ import {
   __getComments,
   __addComments,
   __deleteComments,
+  __patchComment,
 } from "../redux/modules/commentsSlice.js";
-import { getTodoByID } from "../redux/modules/todosSlice.js";
+import { __getTodoByID } from "../redux/modules/todosSlice.js";
 import StButton from "../components/Buttons/StButton.jsx";
 
 const Detail = () => {
+  //el.id랑 비교해서 일치하는것 구분해서 input창으로 바꾸기 ==> 수정 버튼 클릭시 edtiOn 에 아이디들어옴
+  const [editOn, setEditOn] = useState("");
+  // 수정완료시 input창에 작성한 값 받아오기
+  const [input, setInput] = useState("");
   const dispatch = useDispatch();
-  const todo = useSelector((state) => state.todos.todo);
+  const navigate = useNavigate();
   const { comments } = useSelector((state) => state.comments);
-
   const [comment, setComment] = useState({ commentBody: "" });
 
   const { id } = useParams();
-  const navigate = useNavigate();
+  const todo = useSelector((state) => state.todos.todo);
+
+  useEffect(() => {
+    dispatch(__getTodoByID(id));
+    dispatch(__getComments(id));
+  }, []);
+
+  //수정완료버튼
+  const onEditComplete = (commentID) => {
+    dispatch(__patchComment({ id: commentID, comment: input }));
+    // 빈값으로 변경해줘야 일치하는 아이디 없이 input창으로 보여주는거 없애기
+    setEditOn("");
+  };
 
   const onDeleteComment = (id) => {
     dispatch(__deleteComments(id));
@@ -28,7 +44,7 @@ const Detail = () => {
     dispatch(
       __addComments({
         comment: comment.commentBody,
-        id: `comments_${new Date().getTime() + Math.random()}`,
+        id: `comments_${Math.floor(new Date().getTime() + Math.random())}`,
         postId: id,
         isDone: false,
       })
@@ -37,7 +53,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    dispatch(getTodoByID(id));
+    dispatch(__getTodoByID(id));
     dispatch(__getComments(id));
   }, [dispatch, id]);
 
@@ -47,7 +63,7 @@ const Detail = () => {
         <StDialog>
           <div>
             <StDialogHeader>
-              <div>ID :{todo?.id}</div>
+              <div>ID :{todo.id}</div>
               <StButtonGroup>
                 <StButton
                   borderColor="black"
@@ -100,14 +116,47 @@ const Detail = () => {
 
       <StCommentContainer>
         {comments?.map((el) => {
-          // console.log(el);
-          return (
+          //editOn 아이디랑 비교해서 일치하는것 3항연산자 써서 인풋창으로 바꾸기
+          return el.id === editOn ? (
+            <StComment key={`comment_${el.id}`}>
+              <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
+              <input onChange={(e) => setInput(e.target.value)} value={input} />
+
+              <StButtonGroup>
+                <StButton
+                  onClick={() => onEditComplete(el.id)}
+                  borderColor="teal"
+                  width="50px"
+                  height="30px"
+                >
+                  수정완료
+                </StButton>
+                <StButton
+                  borderColor="red"
+                  width="50px"
+                  height="30px"
+                  //에딧온 바꿔줘서 일치하는 아잉디없게 만들기
+                  onClick={() => setEditOn("")}
+                >
+                  취소
+                </StButton>
+              </StButtonGroup>
+            </StComment>
+          ) : (
             <StComment key={`comment_${el.id}`}>
               <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
               <div>{el.comment}</div>
 
               <StButtonGroup>
-                <StButton borderColor="teal" width="50px" height="30px">
+                <StButton
+                  onClick={() => {
+                    setEditOn(el.id);
+                    setInput(el.comment);
+                  }}
+                  borderColor="teal"
+                  width="50px"
+                  height="30px"
+                >
                   수정
                 </StButton>
                 <StButton

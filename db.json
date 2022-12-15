@@ -1,29 +1,23 @@
 {
   "todos": [
     {
-      "id": "todos_1670992606566.1055",
-      "title": "asdsa",
-      "body": "asdasd",
-      "isDone": true
-    },
-    {
-      "id": "todos_1670992800628.861",
-      "title": "ㅇㄹㅇㄹ",
-      "body": "ㄴㅇㄹㄴㅇ",
-      "isDone": false
-    },
-    {
-      "id": "todos_1671007613147.2268",
-      "title": "순대국 짱짱",
-      "body": "라면 뿌셔먹고 짱짱",
+      "id": "todos_1671031945679",
+      "title": "asdf",
+      "body": "asdfasdf",
       "isDone": false
     }
   ],
   "comments": [
     {
-      "comment": "ㅋㅌㅋㅌ",
-      "id": "comments_1671006999936.7515",
-      "postId": "todos_1670992800628.861",
+      "comment": "qwekrmlkqwemrqewr",
+      "id": "comments_1671031949637",
+      "postId": "todos_1671031945679",
+      "isDone": false
+    },
+    {
+      "comment": "fffffasdfasdf",
+      "id": "comments_1671032154316",
+      "postId": "todos_1671031945679",
       "isDone": false
     }
   ]

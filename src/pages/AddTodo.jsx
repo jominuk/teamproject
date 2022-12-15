@@ -23,7 +23,7 @@ const AddTodo = () => {
     if (input.title.trim() === "" || input.body.trim() === "") return;
     dispatch(
       __addTodos({
-        id: `todos_${new Date().getTime() + Math.random()}`,
+        id: `todos_${Math.floor(new Date().getTime() + Math.random())}`,
         title: input.title,
         body: input.body,
         isDone: false,

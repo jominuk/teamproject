@@ -17,6 +17,7 @@ const EditTodo = () => {
   };
 
   const editSubmit = () => {
+    if (input.title === "" || input.body === "") return;
     dispatch(
       __editTodo({
         id: todo.id,
