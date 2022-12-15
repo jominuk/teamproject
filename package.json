@@ -11,6 +11,7 @@
     "axios": "^1.2.1",
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
     "json-server": "^0.17.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,12 +25,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "node server",
-    "start:dev": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "cross-env NODE_PATH=src npm run build"
+    "deploy": "yarn run build && aws s3 sync build/ s3://minuktest"
   },
   "eslintConfig": {
     "extends": [
