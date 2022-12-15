@@ -5,7 +5,10 @@ export const __addTodos = createAsyncThunk(
   "ADD_TODO",
   async (payload, thunkAPI) => {
     try {
-      await axios.post("http://localhost:3001/todos", payload);
+      await axios.post(
+        "https://json-server-vercel-tau.vercel.app/posts",
+        payload
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -17,7 +20,9 @@ export const __getTodoByID = createAsyncThunk(
   "GET_TODO_BY_ID",
   async (payload, thunkAPI) => {
     try {
-      const todo = await axios.get(`http://localhost:3001/todos/${payload}`);
+      const todo = await axios.get(
+        `https://json-server-vercel-tau.vercel.app/posts/${payload}`
+      );
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -29,7 +34,9 @@ export const __getTodos = createAsyncThunk(
   "GET_TODOS",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/todos");
+      const { data } = await axios.get(
+        "https://json-server-vercel-tau.vercel.app/posts"
+      );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -42,9 +49,12 @@ export const __toggleStatusTodo = createAsyncThunk(
   "TOGGLE_STATUS_TODO",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(`http://localhost:3001/todos/${payload.id}`, {
-        isDone: !payload.isDone,
-      });
+      await axios.patch(
+        `https://json-server-vercel-tau.vercel.app/posts/${payload.id}`,
+        {
+          isDone: !payload.isDone,
+        }
+      );
       return thunkAPI.fulfillWithValue(payload.id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -56,7 +66,9 @@ export const __deleteTodo = createAsyncThunk(
   "DELETE_TODO",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:3001/todos/${payload}`);
+      await axios.delete(
+        `https://json-server-vercel-tau.vercel.app/posts/${payload}`
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -68,10 +80,13 @@ export const __editTodo = createAsyncThunk(
   "editTodo",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(`http://localhost:3001/todos/${payload.id}`, {
-        title: payload.title,
-        body: payload.body,
-      });
+      await axios.patch(
+        `https://json-server-vercel-tau.vercel.app/posts/${payload.id}`,
+        {
+          title: payload.title,
+          body: payload.body,
+        }
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -83,7 +98,9 @@ export const getTodoByID = createAsyncThunk(
   "DETAIL_TODOS",
   async (id, thunkAPI) => {
     try {
-      const detail = await axios.get(`http://localhost:3001/todos/${id}`);
+      const detail = await axios.get(
+        `https://json-server-vercel-tau.vercel.app/posts/${id}`
+      );
       return thunkAPI.fulfillWithValue(detail.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);

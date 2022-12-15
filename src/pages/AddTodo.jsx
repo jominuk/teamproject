@@ -20,11 +20,12 @@ const AddTodo = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (input.title.trim() === "" || input.body.trim() === "") return;
-
+    if (input.title.length < 2 || input.title.length > 10) {
+      return alert("제목을 2-10글자 사이로 넣어주세요");
+    }
     dispatch(
       __addTodos({
-        id: `todos_${Math.floor(new Date().getTime() + Math.random())}`,
+        id: `todos_${new Date().getTime() + Math.random()}`,
         title: input.title,
         body: input.body,
         isDone: false,
@@ -48,6 +49,7 @@ const AddTodo = () => {
             onChange={onChangeHandler}
             placeholder="제목을 작성해주세요"
           />
+          <StRed length={input.title.length}>2자 - 10자를 넣어주세요</StRed>
           <BodoyInput
             type="text"
             name="body"
@@ -55,15 +57,11 @@ const AddTodo = () => {
             onChange={onChangeHandler}
             placeholder="내용을 작성해주세요"
           />
+          <StRed2 length={input.body.length}>내용을 꼭 작성해주세요</StRed2>
           <BtnBox>
-            <StButton
-              width="13rem"
-              height="40px"
-              borderColor="blue"
-              type="submit"
-            >
-              버킷 추가하기
-            </StButton>
+            <BucketAddButton disabled={input.body.length > 0 ? false : true}>
+              버킷추가하기
+            </BucketAddButton>
             <StButton
               width="13rem"
               height="40px"
@@ -80,6 +78,25 @@ const AddTodo = () => {
     </Addcontainer>
   );
 };
+
+const BucketAddButton = styled.button`
+  width: 13rem;
+  height: 40px;
+  border-color: blue;
+`;
+const StRed = styled.div`
+  display: ${({ length }) => (length > 2 && length <= 10 ? "none" : "block")};
+  color: #e74c3c;
+  font-weight: 600;
+  position: absolute;
+`;
+
+const StRed2 = styled.div`
+  display: ${({ length }) => (length > 0 ? "none" : "block")};
+  color: #e74c3c;
+  font-weight: 600;
+  position: absolute;
+`;
 
 const Addcontainer = styled.div`
   width: 100%;

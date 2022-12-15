@@ -18,7 +18,6 @@ StButton.default = {
 const Button = styled.button`
   border: 2px solid
     ${(props) => {
-      console.log(props);
       return props.borderColor;
     }};
   font-size: 13px;
