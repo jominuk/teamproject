@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import {
   __deleteTodo,
   __toggleStatusTodo,
@@ -11,17 +10,15 @@ import { __deleteCommentByTodoID } from "../../redux/modules/commentsSlice.js";
 
 const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   const dispatch = useDispatch();
-  const onDeleteTodo = (id) => {
-    dispatch(__deleteTodo(id));
-  };
 
   const onToggleStatusTodo = ({ id, isDone }) => {
     dispatch(__toggleStatusTodo({ id, isDone }));
   };
 
-  const onDeleteComment = (id) => {
+  const onDeleteButton = ( id) => {
+    dispatch(__deleteTodo(id));
     dispatch(__deleteCommentByTodoID(id));
-  };
+  }
 
   return (
     <StTodoContainer
@@ -33,13 +30,13 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
       </StLink>
       <div>
         <h2 className="todo-title">
-          {todo.title.length > 14
-            ? todo.title.substring(0, 14) + "..."
+          {todo.title.length > 12
+            ? todo.title.substring(0, 12) + "..."
             : todo.title}
         </h2>
         <div>
-          {todo.body.length > 40
-            ? todo.body.substring(0, 40) + "..."
+          {todo.body.length > 18
+            ? todo.body.substring(0, 18) + "..."
             : todo.body}
         </div>
       </div>
@@ -49,8 +46,8 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
           height="40px"
           borderColor="red"
           onClick={() => {
-            onDeleteTodo(todo.id);
-            onDeleteComment(todo.id);
+            onDeleteButton(todo.id)
+           
           }}
         >
           삭제하기

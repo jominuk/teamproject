@@ -16,18 +16,16 @@ const Detail = () => {
   const [editOn, setEditOn] = useState("");
   // 수정완료시 input창에 작성한 값 받아오기
   const [input, setInput] = useState("");
+  
   const dispatch = useDispatch();
+  const { id } = useParams();
   const navigate = useNavigate();
+
   const { comments } = useSelector((state) => state.comments);
   const [comment, setComment] = useState({ commentBody: "" });
 
-  const { id } = useParams();
   const todo = useSelector((state) => state.todos.todo);
 
-  useEffect(() => {
-    dispatch(__getTodoByID(id));
-    dispatch(__getComments(id));
-  }, []);
 
   //수정완료버튼
   const onEditComplete = (commentID) => {
@@ -39,14 +37,16 @@ const Detail = () => {
   const onDeleteComment = (id) => {
     dispatch(__deleteComments(id));
   };
+  
   const onClickHandler = (e) => {
     if (!comment.commentBody) return;
     dispatch(
       __addComments({
         comment: comment.commentBody,
-        id: `comments_${Math.floor(new Date().getTime() + Math.random())}`,
+        id: `comments_${(new Date().getTime() + Math.random())}`,
         postId: id,
         isDone: false,
+        date : new Date().toLocaleDateString()  // 오늘의 시간
       })
     );
     setComment("");
@@ -103,6 +103,8 @@ const Detail = () => {
               commentBody: value,
             });
           }}
+          maxLength="10"
+          placeholder="10글자 입력 가능합니다."
         />
         <StButton
           borderColor="teal"
@@ -119,8 +121,9 @@ const Detail = () => {
           //editOn 아이디랑 비교해서 일치하는것 3항연산자 써서 인풋창으로 바꾸기
           return el.id === editOn ? (
             <StComment key={`comment_${el.id}`}>
-              <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
-              <input onChange={(e) => setInput(e.target.value)} value={input} />
+
+              <StCalendar>{el.date}</StCalendar>
+              <Stinput onChange={(e) => setInput(e.target.value)} value={input} maxLength="10" />
 
               <StButtonGroup>
                 <StButton
@@ -129,13 +132,13 @@ const Detail = () => {
                   width="50px"
                   height="30px"
                 >
-                  수정완료
+                  완료
                 </StButton>
                 <StButton
                   borderColor="red"
                   width="50px"
                   height="30px"
-                  //에딧온 바꿔줘서 일치하는 아잉디없게 만들기
+                  //에딧온 바꿔줘서 일치하는 아이디 없게 만들기
                   onClick={() => setEditOn("")}
                 >
                   취소
@@ -144,7 +147,7 @@ const Detail = () => {
             </StComment>
           ) : (
             <StComment key={`comment_${el.id}`}>
-              <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
+              <StCalendar>{el.date}</StCalendar>
               <div>{el.comment}</div>
 
               <StButtonGroup>
@@ -178,6 +181,10 @@ const Detail = () => {
 };
 
 export default Detail;
+
+const Stinput = styled.input`
+    border-radius: 5px;
+`
 
 const StContainer = styled.div`
   width: 99.6%;
