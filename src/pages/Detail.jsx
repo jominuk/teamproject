@@ -103,6 +103,8 @@ const Detail = () => {
               commentBody: value,
             });
           }}
+          maxLength="10"
+          placeholder="10글자 입력 가능합니다."
         />
         <StButton
           borderColor="teal"
@@ -120,7 +122,7 @@ const Detail = () => {
           return el.id === editOn ? (
             <StComment key={`comment_${el.id}`}>
               <StCalendar>{new Date().toLocaleDateString()}</StCalendar>
-              <input onChange={(e) => setInput(e.target.value)} value={input} />
+              <input onChange={(e) => setInput(e.target.value)} value={input} maxLength="10"/>
 
               <StButtonGroup>
                 <StButton
