@@ -21,6 +21,7 @@ const AddTodo = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (input.title.trim() === "" || input.body.trim() === "") return;
+
     dispatch(
       __addTodos({
         id: `todos_${Math.floor(new Date().getTime() + Math.random())}`,

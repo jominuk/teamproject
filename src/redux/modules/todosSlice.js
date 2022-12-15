@@ -122,7 +122,7 @@ const todosSlice = createSlice({
     },
     [__getTodoByID.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action);
+
       state.todo = action.payload;
     },
     [__getTodoByID.rejected]: (state, action) => {
