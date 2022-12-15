@@ -3,10 +3,10 @@ import axios from "axios";
 
 export const __addTodos = createAsyncThunk(
   "ADD_TODO",
-  async (todo, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      await axios.post("http://localhost:3001/todos", todo);
-      return thunkAPI.fulfillWithValue(todo);
+      await axios.post("http://localhost:3001/todos", payload);
+      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
