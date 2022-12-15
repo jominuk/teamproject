@@ -80,14 +80,14 @@ export const __editTodo = createAsyncThunk(
   "editTodo",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(
+      const edited = await axios.patch(
         `https://mighty-basin-21011.herokuapp.com/todos/${payload.id}`,
         {
           title: payload.title,
           body: payload.body,
         }
-      );
-      return thunkAPI.fulfillWithValue(payload);
+      );    
+      return thunkAPI.fulfillWithValue(edited.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -204,7 +204,7 @@ const todosSlice = createSlice({
     //상세 페이지 수정
     [__editTodo.pending]: (state) => {
       state.isLoading = true;
-    },
+    },    
     [__editTodo.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
       state.todos = state.todos.map((user) =>
