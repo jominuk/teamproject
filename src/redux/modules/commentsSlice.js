@@ -20,24 +20,6 @@ export const __addComments = createAsyncThunk(
   }
 );
 
-export const __patchComment = createAsyncThunk(
-  "PATCH_COMMENT",
-  async (payload, thunkAPI) => {
-    try {
-      await axios.patch(`http://localhost:3001/comments/${payload.id}`, {
-        comment: payload.comment,
-      });
-
-      return thunkAPI.fulfillWithValue({
-        id: payload.id,
-        comment: payload.comment,
-      });
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 export const __getComments = createAsyncThunk(
   "getComments",
   async (payload, thunkAPI) => {
@@ -68,6 +50,24 @@ export const __deleteCommentByTodoID = createAsyncThunk(
   }
 );
 
+export const __patchComment = createAsyncThunk(
+  "PATCH_COMMENT",
+  async (payload, thunkAPI) => {
+    try {
+      await axios.patch(`http://localhost:3001/comments/${payload.id}`, {
+        comment: payload.comment,
+      });
+      return thunkAPI.fulfillWithValue({
+        id: payload.id,
+        comment: payload.comment,
+      });
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+
 export const __deleteComments = createAsyncThunk(
   "deleteComments",
   async (payload, thunkAPI) => {
@@ -85,6 +85,7 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+
     //add
     [__addComments.pending]: (state, action) => {
       state.isLoading = true;
@@ -131,6 +132,7 @@ const commentsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
     // 딜리트 커멘트올
     [__deleteCommentByTodoID.pending]: (state, action) => {
       state.isLoading = true;
@@ -145,7 +147,8 @@ const commentsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // 대슥ㄹ 수정하기
+
+    // 댓글 수정하기
     [__patchComment.pending]: (state, action) => {
       state.isLoading = true;
     },
@@ -161,8 +164,6 @@ const commentsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-
-    __deleteCommentByTodoID,
   },
 });
 

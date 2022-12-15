@@ -1,19 +1,8 @@
 {
   "todos": [
-    {
-      "id": "todos_1671081491093",
-      "title": "ㅇㄹㄴㄴㅇ",
-      "body": "ㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹ",
-      "isDone": false
-    }
+   
   ],
   "comments": [
-    {
-      "comment": "ㅁㄴㅇㅁㄴㅇ",
-      "id": "comments_1671083997244.551",
-      "postId": "todos_1671081491093",
-      "isDone": false,
-      "date": "2022. 12. 15."
-    }
+  
   ]
 }
