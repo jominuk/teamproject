@@ -1,76 +1,24 @@
 {
   "todos": [
     {
-      "id": "todos_1670945293085",
-      "title": "김태현",
-      "body": "ㄸㄸ",
-      "isDone": false
-    },
-    {
-      "id": "todos_1670976973131",
-      "title": "sdaf",
-      "body": "asdf",
-      "isDone": true
-    },
-    {
-      "id": "todos_1670977007979",
-      "title": "운동하기",
-      "body": "오늘은꼭",
-      "isDone": false
-    },
-    {
-      "id": "todos_1670982740932",
-      "title": "rlaxogusfaskdfnkasdf",
-      "body": "wewwe",
-      "isDone": false
-    },
-    {
-      "id": "todos_1670982758742",
-      "title": "ㅁㄴ아르ㅏㅁ느아르만으라ㅡㅁ나으람느앎ㄴㅇㄹ",
-      "body": "ㅇㅇㅇ",
-      "isDone": false
-    },
-    {
-      "id": "todos_1670982817553",
-      "title": "ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁ",
-      "body": "ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ",
+      "id": "todos_1671031945679",
+      "title": "asdf",
+      "body": "asdfasdf",
       "isDone": false
     }
   ],
   "comments": [
     {
-      "comment": "김해",
-      "postId": "todos_1670939378182.5593",
-      "isDone": false,
-      "id": 1
+      "comment": "qwekrmlkqwemrqewr",
+      "id": "comments_1671031949637",
+      "postId": "todos_1671031945679",
+      "isDone": false
     },
     {
-      "comment": "f",
-      "postId": "todos_1670940846679",
-      "isDone": false,
-      "id": 2
-    },
-    {
-      "postId": "todos_1670940846679",
-      "isDone": false,
-      "id": 3
-    },
-    {
-      "postId": "todos_1670940846679",
-      "isDone": false,
-      "id": 4
-    },
-    {
-      "comment": "asdf",
-      "postId": "todos_1670945293085",
-      "isDone": false,
-      "id": 5
-    },
-    {
-      "comment": "ff",
-      "postId": "todos_1670945293085",
-      "isDone": false,
-      "id": 6
+      "comment": "fffffasdfasdf",
+      "id": "comments_1671032154316",
+      "postId": "todos_1671031945679",
+      "isDone": false
     }
   ]
 }

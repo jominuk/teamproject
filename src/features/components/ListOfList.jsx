@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import StButton from "../../components/Buttons/StButton.jsx";
+import { __deleteCommentByTodoID } from "../../redux/modules/commentsSlice.js";
 
 const ListOfList = ({ todo, backgroundColor, borderColor }) => {
   const dispatch = useDispatch();
@@ -16,6 +17,10 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
 
   const onToggleStatusTodo = ({ id, isDone }) => {
     dispatch(__toggleStatusTodo({ id, isDone }));
+  };
+
+  const onDeleteComment = (id) => {
+    dispatch(__deleteCommentByTodoID(id));
   };
 
   return (
@@ -43,7 +48,10 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
           width="50%"
           height="40px"
           borderColor="red"
-          onClick={() => onDeleteTodo(todo.id)}
+          onClick={() => {
+            onDeleteTodo(todo.id);
+            onDeleteComment(todo.id);
+          }}
         >
           삭제하기
         </StButton>
@@ -63,7 +71,7 @@ const ListOfList = ({ todo, backgroundColor, borderColor }) => {
 };
 
 const StTodoContainer = styled.div`
-  width: 330px;
+  width: 315px;
   height: 180px;
   border: 4px solid ${({ borderColor }) => borderColor};
   min-height: 150px;
