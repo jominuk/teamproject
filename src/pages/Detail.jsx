@@ -152,6 +152,7 @@ const Detail = () => {
 
               <StButtonGroup>
                 <StButton
+                  //아이디 에딧온으로 바꾸고 input이라는 스테이트에 코멘트값 넣기
                   onClick={() => {
                     setEditOn(el.id);
                     setInput(el.comment);

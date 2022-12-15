@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const StButton = (props) => {
-  const { borderColor, width, height, onClick, children } = props;
-  const styles = { borderColor, width, height };
+  const { borderColor, width, height, onClick, children, borderRadius } = props;
+  const styles = { borderRadius, borderColor, width, height };
 
   return (
     <Button {...styles} onClick={onClick}>
@@ -11,13 +11,19 @@ const StButton = (props) => {
     </Button>
   );
 };
+StButton.default = {
+  borderRadius: "10px",
+};
 
 const Button = styled.button`
-  border: 2px solid ${({ borderColor }) => borderColor};
+  border: 2px solid
+    ${(props) => {
+      return props.borderColor;
+    }};
   font-size: 13px;
   height: ${({ height }) => height};
   width: ${({ width }) => width};
-  border-radius: 5px;
+  border-radius: ${({ borderRadius }) => borderRadius};
   background-color: white;
   cursor: pointer;
 `;
