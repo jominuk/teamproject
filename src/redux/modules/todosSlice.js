@@ -5,10 +5,7 @@ export const __addTodos = createAsyncThunk(
   "ADD_TODO",
   async (payload, thunkAPI) => {
     try {
-      await axios.post(
-        "https://mighty-basin-21011.herokuapp.com/todos",
-        payload
-      );
+      await axios.post("http://localhost:3001/todos", payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -20,9 +17,7 @@ export const __getTodoByID = createAsyncThunk(
   "GET_TODO_BY_ID",
   async (payload, thunkAPI) => {
     try {
-      const todo = await axios.get(
-        `https://mighty-basin-21011.herokuapp.com/todos/${payload}`
-      );
+      const todo = await axios.get(`http://localhost:3001/todos/${payload}`);
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -34,9 +29,7 @@ export const __getTodos = createAsyncThunk(
   "GET_TODOS",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        "https://mighty-basin-21011.herokuapp.com/todos"
-      );
+      const { data } = await axios.get("http://localhost:3001/todos");
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -49,12 +42,9 @@ export const __toggleStatusTodo = createAsyncThunk(
   "TOGGLE_STATUS_TODO",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(
-        `https://mighty-basin-21011.herokuapp.com/todos/${payload.id}`,
-        {
-          isDone: !payload.isDone,
-        }
-      );
+      await axios.patch(`http://localhost:3001/todos/${payload.id}`, {
+        isDone: !payload.isDone,
+      });
       return thunkAPI.fulfillWithValue(payload.id);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -66,9 +56,7 @@ export const __deleteTodo = createAsyncThunk(
   "DELETE_TODO",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(
-        `https://mighty-basin-21011.herokuapp.com/todos/${payload}`
-      );
+      await axios.delete(`http://localhost:3001/todos/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -81,12 +69,12 @@ export const __editTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const edited = await axios.patch(
-        `https://mighty-basin-21011.herokuapp.com/todos/${payload.id}`,
+        `http://localhost:3001/todos/${payload.id}`,
         {
           title: payload.title,
           body: payload.body,
         }
-      );    
+      );
       return thunkAPI.fulfillWithValue(edited.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -98,9 +86,7 @@ export const getTodoByID = createAsyncThunk(
   "DETAIL_TODOS",
   async (id, thunkAPI) => {
     try {
-      const detail = await axios.get(
-        `https://mighty-basin-21011.herokuapp.com/todos/${id}`
-      );
+      const detail = await axios.get(`http://localhost:3001/todos/${id}`);
       return thunkAPI.fulfillWithValue(detail.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -204,7 +190,7 @@ const todosSlice = createSlice({
     //상세 페이지 수정
     [__editTodo.pending]: (state) => {
       state.isLoading = true;
-    },    
+    },
     [__editTodo.fulfilled]: (state, action) => {
       state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경
       state.todos = state.todos.map((user) =>

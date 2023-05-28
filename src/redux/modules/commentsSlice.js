@@ -11,10 +11,7 @@ export const __addComments = createAsyncThunk(
   "addComments",
   async (comment, thunkAPI) => {
     try {
-      await axios.post(
-        "https://mighty-basin-21011.herokuapp.com/comments",
-        comment
-      );
+      await axios.post("http://localhost:3001/comments", comment);
 
       return thunkAPI.fulfillWithValue(comment);
     } catch (error) {
@@ -27,12 +24,9 @@ export const __patchComment = createAsyncThunk(
   "PATCH_COMMENT",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(
-        `https://mighty-basin-21011.herokuapp.com/comments/${payload.id}`,
-        {
-          comment: payload.comment,
-        }
-      );
+      await axios.patch(`http://localhost:3001/comments/${payload.id}`, {
+        comment: payload.comment,
+      });
 
       return thunkAPI.fulfillWithValue({
         id: payload.id,
@@ -48,9 +42,7 @@ export const __getComments = createAsyncThunk(
   "getComments",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        "https://mighty-basin-21011.herokuapp.com/comments"
-      );
+      const data = await axios.get("http://localhost:3001/comments");
       const response = data.data.filter((el) => el.postId === payload);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
@@ -63,14 +55,10 @@ export const __deleteCommentByTodoID = createAsyncThunk(
   "DELETE_COMMENT_BY_TODO_ID",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        `https://mighty-basin-21011.herokuapp.com/comments`
-      );
+      const { data } = await axios.get(`http://localhost:3001/comments`);
       data.forEach((el) =>
         el.postId === payload
-          ? axios.delete(
-              `https://mighty-basin-21011.herokuapp.com/comments/${el.id}`
-            )
+          ? axios.delete(`http://localhost:3001/comments/${el.id}`)
           : null
       );
       return thunkAPI.fulfillWithValue(payload);
@@ -79,7 +67,6 @@ export const __deleteCommentByTodoID = createAsyncThunk(
     }
   }
 );
-
 
 export const __deleteComments = createAsyncThunk(
   "deleteComments",
@@ -100,7 +87,6 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-
     //add
     [__addComments.pending]: (state, action) => {
       state.isLoading = true;
