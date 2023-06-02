@@ -17,9 +17,7 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<AddTodo />} />
           <Route path="/:id" element={<Detail />} />
-          <Route path="/EditTodo" element={<EditTodo />}>
-            {/* <Route path="/:id"  /> */}
-          </Route>
+          <Route path="/EditTodo" element={<EditTodo />}></Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

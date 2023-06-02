@@ -30,7 +30,7 @@ Form.defaultProps = {
     fontWeight: 700,
   },
 };
-//폼의 종류별로 쓰고싶을떄 프롭스로 넘겨받았ㄷ을때
+//폼의 종류별로 쓰고싶을떄 프롭스로 넘겨받았을때
 
 export default Form;
 

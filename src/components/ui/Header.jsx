@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Header = () => {
   return (
     <StContainer>
-      <h4>1조 화이팅</h4>
+      <h1>1조 화이팅</h1>
       <h4>REACT</h4>
     </StContainer>
   );
